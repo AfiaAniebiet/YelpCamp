@@ -7,6 +7,7 @@ require("dotenv").config();
 
 // Importing custom modules
 const MONGO_CONNECTION = require("./database/dbConnection");
+const campgroundRoute = require("./routes/campground.route");
 
 // Starting the express app
 const app = express();
@@ -18,6 +19,9 @@ app.set("views", path.join(__dirname, "views"));
 
 // middlewares
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use("/api/v1", campgroundRoute);
 
 const PORT = process.env.PORT || 4000;
 
