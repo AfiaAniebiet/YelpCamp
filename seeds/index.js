@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Campground = require("../models/campground");
+const Campground = require("../models/campground.model");
 const cities = require("../seeds/cities");
 
 const seedDB = async () => {
