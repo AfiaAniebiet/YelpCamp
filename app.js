@@ -6,6 +6,7 @@ const express = require("express");
 require("dotenv").config();
 const methodOverride = require("method-override");
 const morgan = require("morgan");
+const ejsMate = require("ejs-mate");
 
 // Importing custom modules
 const MONGO_CONNECTION = require("./database/dbConnection");
@@ -15,6 +16,7 @@ const campgroundRoute = require("./routes/campground.route");
 const app = express();
 
 // Setting up ejs
+app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 // app.set("views", "views");
