@@ -10,6 +10,6 @@ router
   .get(campgroundController.getCampground)
   .patch(campgroundController.editCampground)
   .delete(campgroundController.deleteCampground);
-router.route("/camground/:id/edit").get(campgroundController.getEditCampground);
+router.route("/campground/:id/edit").get(campgroundController.getEditCampground);
 
 module.exports = router;
