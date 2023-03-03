@@ -1,5 +1,6 @@
 const Campground = require("../models/campground.model");
 const { StatusCodes } = require("http-status-codes");
+const CustomError = require("../utils/CustomError");
 
 // Get all campgrounds
 const getCampgrounds = async (req, res, next) => {
@@ -11,7 +12,9 @@ const getCampgrounds = async (req, res, next) => {
 };
 
 const getCampground = async (req, res, next) => {
-  const campground = await Campground.findById(req.params.id);
+  const { id: campgroundId } = req.params;
+  const campground = await Campground.findById({ _id: campgroundId });
+  //const campground = await Campground.findById(req.params.id);
   res.render("campgrounds/show", {
     campground,
   });
@@ -22,7 +25,9 @@ const getNewCampgroundForm = async (req, res, next) => {
 };
 
 const postCampground = async (req, res, next) => {
-  res.send(req.body);
+  const campground = new Campground(req.body.campground);
+  await campground.save();
+  res.redirect(`/api/v1/campground/${campground._id}`);
 };
 
 const getEditCampground = async (req, res, next) => {
