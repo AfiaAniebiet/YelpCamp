@@ -25,8 +25,9 @@ const getNewCampgroundForm = async (req, res, next) => {
 };
 
 const postCampground = async (req, res, next) => {
-  const campground = new Campground(req.body.campground);
-  await campground.save();
+  const campground = await Campground.create(req.body.campground);
+  //const campground = new Campground(req.body.campground);
+  // await campground.save();
   res.redirect(`/api/v1/campground/${campground._id}`);
 };
 
@@ -40,7 +41,7 @@ const getEditCampground = async (req, res, next) => {
 const editCampground = async (req, res, next) => {
   const { id } = req.params;
   const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
-  res.redirect(`/api/v1/campgrounds/${campground._id}`);
+  res.redirect(`/api/v1/campground/${campground._id}`);
 };
 
 const deleteCampground = async (req, res, next) => {
