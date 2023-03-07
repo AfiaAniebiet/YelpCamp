@@ -3,7 +3,7 @@ const router = express.Router();
 
 const campgroundController = require("../controllers/campground.controller");
 const reviewController = require("../controllers/reviews.controller");
-const { validateCampground } = require("../middleware/joi.middleware");
+const { validateCampground, validateReview } = require("../middleware/joi.middleware");
 
 router
   .route("/campgrounds")
@@ -17,6 +17,6 @@ router
   .delete(campgroundController.deleteCampground);
 router.route("/campground/:id/edit").get(campgroundController.getEditCampground);
 
-router.route("/campground/:id/reviews").post(reviewController.postReview);
+router.route("/campground/:id/reviews").post(validateReview, reviewController.postReview);
 
 module.exports = router;
