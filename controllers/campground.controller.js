@@ -13,7 +13,7 @@ const getCampgrounds = async (req, res, next) => {
 
 const getCampground = async (req, res, next) => {
   const { id: campgroundId } = req.params;
-  const campground = await Campground.findById({ _id: campgroundId });
+  const campground = await Campground.findById({ _id: campgroundId }).populate("reviews");
   //const campground = await Campground.findById(req.params.id);
   res.render("campgrounds/show", {
     campground,
@@ -46,7 +46,7 @@ const editCampground = async (req, res, next) => {
 
 const deleteCampground = async (req, res, next) => {
   const { id } = req.params;
-  const campground = await Campground.findByIdAndDelete(id);
+  await Campground.findByIdAndDelete(id);
   res.redirect(`/api/v1/campgrounds`);
 };
 
