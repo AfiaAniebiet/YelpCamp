@@ -18,5 +18,6 @@ router
 router.route("/campground/:id/edit").get(campgroundController.getEditCampground);
 
 router.route("/campground/:id/reviews").post(validateReview, reviewController.postReview);
+router.route("/campground/:id/reviews/:reviewId").delete(reviewController.deleteReview);
 
 module.exports = router;
