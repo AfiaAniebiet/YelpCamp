@@ -10,6 +10,14 @@ const postReview = async (req, res, next) => {
   res.redirect(`/api/v1/campground/${campground._id}`);
 };
 
+const deleteReview = async (req, res, next) => {
+  const { id, reviewId } = req.params;
+  await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+  await Review.findByIdAndDelete(reviewId);
+  res.redirect(`/api/v1/campground/${id}`);
+};
+
 module.exports = {
   postReview,
+  deleteReview,
 };
