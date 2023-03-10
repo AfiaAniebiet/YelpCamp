@@ -11,6 +11,7 @@ const ejsMate = require("ejs-mate");
 // Importing custom modules
 const MONGO_CONNECTION = require("./database/dbConnection");
 const campgroundRoute = require("./routes/campground.route");
+const reviewRoute = require("./routes/review.route");
 
 // Starting the express app
 const app = express();
@@ -29,6 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 app.use("/api/v1", campgroundRoute);
+app.use("/api/v1", reviewRoute);
 
 const PORT = process.env.PORT || 4000;
 
